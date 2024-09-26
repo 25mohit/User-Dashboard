@@ -2,7 +2,7 @@ import { Button, Modal } from 'react-bootstrap'
 
 const AddModal = ({ isEmpty, setIsEmpty, showModal, setShowModal, newUser, setNewUser, handleAdd }) => {
   return (
-    <Modal show={showModal} onHide={() => setShowModal(false)}>
+    <Modal show={showModal} onHide={() => {setShowModal(false); setIsEmpty(false)}}>
         <Modal.Header closeButton>
           <Modal.Title>Add New User</Modal.Title>
         </Modal.Header>
@@ -28,7 +28,7 @@ const AddModal = ({ isEmpty, setIsEmpty, showModal, setShowModal, newUser, setNe
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+          <Button variant="secondary" onClick={() => {setShowModal(false); setIsEmpty(false)}}>Close</Button>
           <Button variant="primary" onClick={handleAdd}>Save Changes</Button>
         </Modal.Footer>
       </Modal>
