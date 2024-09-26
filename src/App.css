@@ -80,3 +80,14 @@
     transform: rotate(360deg);
   }
 }
+.breadcrump{
+  /* border: 1px solid rgb(186, 186, 186); */
+  padding: 0.5rem 0.8rem;
+  width: fit-content;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 0 15px 1px rgba(10,10,10,0.3);
+}

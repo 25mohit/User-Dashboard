@@ -67,10 +67,10 @@ const TableContainer = ({ data }) => {
             ) : (
               dt?.phone
             )}</td>
-            <td>{dt?.address?.city} ({dt?.address?.zipcode})</td>
+            <td>{dt?.address?.city} <span title="Zip Code">({dt?.address?.zipcode})</span></td>
             <td className='controls'>
               {isEditing === dt.id ? (
-                <Button size="sm" variant="primary" onClick={handleSave}>Save</Button>
+                <Button size="sm" variant="warning" onClick={handleSave}>Save</Button>
               ) : (
                 <Button size="sm" variant="primary" onClick={() => handleEdit(dt)}>Edit</Button>
               )}
