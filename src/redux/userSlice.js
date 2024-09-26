@@ -33,13 +33,13 @@ export const updateUser = createAsyncThunk(
 
 
 export const addUser = createAsyncThunk(
-  'users/addUser',   
-
+  'users/addUser',
   async (newUser) => {
     const response = await axios.post('https://jsonplaceholder.typicode.com/users', newUser);
     return response.data;
   }
 );
+
 const usersSlice = createSlice({
   name: 'users',
   initialState,
@@ -68,8 +68,7 @@ const usersSlice = createSlice({
         }
       })
       .addCase(addUser.fulfilled, (state, action) => {
-        state.users.push(action.payload);   
-
+        state.users.push(action.payload);
       });
   },
 });

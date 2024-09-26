@@ -6,36 +6,34 @@ import { deleteUser, updateUser } from '../redux/userSlice';
 import Loading from './Utils/Loading';
 
 const TableContainer = ({ data }) => {
-    const dispatch = useDispatch();
-    const [isEditing, setIsEditing] = useState(null);
-    const [editedUser, setEditedUser] = useState({});
-    const [isDeleting, setIsDeleting] = useState(null);
+  const [isEditing, setIsEditing] = useState(null);
+  const [editedUser, setEditedUser] = useState({});
+  const [isDeleting, setIsDeleting] = useState(null);
+
+  const dispatch = useDispatch();
+
+  const handleDelete = async (userId) => {
+    setIsDeleting(true);
+    try {
+      await dispatch(deleteUser(userId));
+      setIsDeleting(false);
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      setIsDeleting(false);
+    }
+  };
+
+
+  const handleEdit = (user) => {
+    setIsEditing(user.id);
+    setEditedUser({ ...user });
+  };
+
+  const handleSave = () => {
+    dispatch(updateUser(editedUser));
+    setIsEditing(null);
+  };
   
-    const handleDelete = async (userId) => {
-      setIsDeleting(true);
-      try {
-        await dispatch(deleteUser(userId));
-        setIsDeleting(false);
-      } catch (error) {
-        console.error('Error deleting user:', error);
-        setIsDeleting(false);
-      }
-    };
-
-    console.log("isDeleting", isDeleting);
-    
-
-    const handleEdit = (user) => {
-        setIsEditing(user.id);
-        setEditedUser({ ...user });
-    };
-    const handleSave = () => {
-        dispatch(updateUser(editedUser));
-        setIsEditing(null);
-    };
-
-    console.log("data", data);
-    
   return (
     <Table striped bordered hover>
       <thead>
@@ -49,7 +47,7 @@ const TableContainer = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-      {data?.map((dt) => (
+        {data?.map((dt) => (
           <tr key={dt?.id} className='row-n'>
             <td>{dt?.id}</td>
             <td>{isEditing === dt.id ? (
@@ -67,7 +65,7 @@ const TableContainer = ({ data }) => {
             ) : (
               dt?.phone
             )}</td>
-            <td>{dt?.address?.city} <span title="Zip Code">({dt?.address?.zipcode})</span></td>
+            <td>{dt?.address?.city} {dt?.address?.zipcode && <span title="Zip Code">({dt?.address?.zipcode})</span>}</td>
             <td className='controls'>
               {isEditing === dt.id ? (
                 <Button size="sm" variant="warning" onClick={handleSave}>Save</Button>
@@ -79,7 +77,7 @@ const TableContainer = ({ data }) => {
           </tr>
         ))}
       </tbody>
-      { (!data?.length || isDeleting) && <Loading /> }
+      {(!data?.length || isDeleting) && <Loading />}
     </Table>
   )
 }

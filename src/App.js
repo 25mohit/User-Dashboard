@@ -3,7 +3,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import { addUser, fetchUsers } from './redux/userSlice';
 import TableContainer from './components/TableContainer';
-import { Button, Modal } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import AddModal from './components/Utils/AddModal';
 
 function App() {
@@ -11,25 +11,24 @@ function App() {
   const [newUser, setNewUser] = useState({
      name: '',
      email: '',
-     // ... other fields
    })
   const dispatch = useDispatch()
   const users = useSelector((state) => state.users.users);
-
-  console.log("users", users);
   
   useEffect(() => {
     dispatch(fetchUsers())
   },[])
 
   const handleAdd = () => {
-    dispatch(addUser(newUser));
-    setShowModal(false);
-    setNewUser({
-      name: '',
-      email: '',
-      // ... other fields
-    });
+    if(newUser?.name !==""){
+      dispatch(addUser(newUser));
+      setShowModal(false);
+      setNewUser({
+        name: '',
+        email: '',
+        phone: ''
+      });
+    }
   };
   return (
     <div className="App">

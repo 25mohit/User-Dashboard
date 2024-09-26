@@ -91,3 +91,9 @@
   gap: 1rem;
   box-shadow: 0 0 15px 1px rgba(10,10,10,0.3);
 }
+.form-group > label{
+  margin-bottom: 0.3rem;
+}
+.form-control{
+  margin-bottom: 0.6rem;
+}

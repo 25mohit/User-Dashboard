@@ -25,17 +25,11 @@ const AddModal = ({ showModal, setShowModal, newUser, setNewUser, handleAdd }) =
               <label htmlFor="zipcode">Zipcode</label>
               <input type="text" className="form-control" id="zipcode" value={newUser?.address?.zipcode} onChange={(e) => setNewUser({ ...newUser, address:{...newUser.address, zipcode: e.target.value} })} />
             </div>
-            {/* ... other input fields */}
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleAdd}>   
-
-            Save Changes
-          </Button>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+          <Button variant="primary" onClick={handleAdd}>Save Changes</Button>
         </Modal.Footer>
       </Modal>
   )
