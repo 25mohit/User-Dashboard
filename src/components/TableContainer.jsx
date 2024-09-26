@@ -33,6 +33,9 @@ const TableContainer = ({ data }) => {
         dispatch(updateUser(editedUser));
         setIsEditing(null);
     };
+
+    console.log("data", data);
+    
   return (
     <Table striped bordered hover>
       <thead>
@@ -76,7 +79,7 @@ const TableContainer = ({ data }) => {
           </tr>
         ))}
       </tbody>
-      { isDeleting && <Loading /> }
+      { (!data?.length || isDeleting) && <Loading /> }
     </Table>
   )
 }

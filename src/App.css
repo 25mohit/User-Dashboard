@@ -22,7 +22,8 @@
 .container{
   height: calc(100vh - var(--nav-height));
   overflow: auto;
-  padding: 2rem;
+  width: 100vw ;
+  padding: 2rem 0;
 }
 .controls{
   display: flex;
