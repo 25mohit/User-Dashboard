@@ -15,6 +15,22 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
+export const deleteUser = createAsyncThunk(
+  'users/deleteUser',
+  async (userId) => {
+    await axios.delete(`https://jsonplaceholder.typicode.com/users/${userId}`);
+    return userId;
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  'users/updateUser',
+  async (updatedUser) => {
+    await axios.put(`https://jsonplaceholder.typicode.com/users/${updatedUser.id}`, updatedUser);
+    return updatedUser;
+  }
+);
+
 const usersSlice = createSlice({
   name: 'users',
   initialState,
@@ -32,6 +48,15 @@ const usersSlice = createSlice({
       .addCase(fetchUsers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        state.users = state.users.filter((user) => user.id !== action.payload);
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        const updatedUserIndex = state.users.findIndex((user) => user.id === action.payload.id);
+        if (updatedUserIndex !== -1) {
+          state.users[updatedUserIndex] = action.payload;
+        }
       });
   },
 });
