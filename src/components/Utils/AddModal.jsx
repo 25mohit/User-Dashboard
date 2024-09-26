@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
 
-const AddModal = ({ showModal, setShowModal, newUser, setNewUser, handleAdd }) => {
+const AddModal = ({ isEmpty, setIsEmpty, showModal, setShowModal, newUser, setNewUser, handleAdd }) => {
   return (
     <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
@@ -11,7 +11,7 @@ const AddModal = ({ showModal, setShowModal, newUser, setNewUser, handleAdd }) =
           <form>
             <div className="form-group">
               <label htmlFor="name">Name</label>
-              <input type="text" className="form-control" id="name" value={newUser.name} onChange={(e) => setNewUser({ ...newUser, name: e.target.value })} />
+              <input type="text" className="form-control" id="name" value={newUser.name} onChange={(e) => {setNewUser({ ...newUser, name: e.target.value }); setIsEmpty(false)}} />
               
               <label htmlFor="email">Email</label>
               <input type="text" className="form-control" id="email" value={newUser.email} onChange={(e) => setNewUser({ ...newUser, email: e.target.value })} />
@@ -24,6 +24,7 @@ const AddModal = ({ showModal, setShowModal, newUser, setNewUser, handleAdd }) =
               
               <label htmlFor="zipcode">Zipcode</label>
               <input type="text" className="form-control" id="zipcode" value={newUser?.address?.zipcode} onChange={(e) => setNewUser({ ...newUser, address:{...newUser.address, zipcode: e.target.value} })} />
+              {isEmpty && <p className="error">Please Enter a Name*</p>}
             </div>
           </form>
         </Modal.Body>

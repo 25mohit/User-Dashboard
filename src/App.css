@@ -97,3 +97,6 @@
 .form-control{
   margin-bottom: 0.6rem;
 }
+.error{
+  color: red;
+}

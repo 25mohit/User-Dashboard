@@ -9,9 +9,10 @@ import AddModal from './components/Utils/AddModal';
 function App() {
   const [showModal, setShowModal] = useState(false);
   const [newUser, setNewUser] = useState({
-     name: '',
-     email: '',
-   })
+    name: '',
+    email: '',
+  })
+  const [isEmpty, setIsEmpty] = useState(false)
   const dispatch = useDispatch()
   const users = useSelector((state) => state.users.users);
   
@@ -28,6 +29,8 @@ function App() {
         email: '',
         phone: ''
       });
+    } else {
+      setIsEmpty(true)
     }
   };
   return (
@@ -41,7 +44,7 @@ function App() {
         </div>
         <TableContainer data={users}/>
       </section>
-      <AddModal showModal={showModal} setShowModal={setShowModal} newUser={newUser} setNewUser={setNewUser} handleAdd={handleAdd}/>
+      <AddModal isEmpty={isEmpty} setIsEmpty={setIsEmpty} showModal={showModal} setShowModal={setShowModal} newUser={newUser} setNewUser={setNewUser} handleAdd={handleAdd}/>
     </div>
   );
 }
